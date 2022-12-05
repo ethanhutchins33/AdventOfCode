@@ -7,5 +7,3 @@ public class Program
     Day1.GetHighestCalories();
   }
 }
-
-
