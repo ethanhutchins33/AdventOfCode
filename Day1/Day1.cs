@@ -11,14 +11,12 @@ public class Day1
       intArray.Add(string.IsNullOrEmpty(line) ? 0 : int.Parse(line));
     }
 
-    intArray.ForEach(x => Console.WriteLine(x));
-
     return intArray;
   }
 
   public static void GetHighestCalories()
   {
-    List<int> calories = GetLinesInTxtFile("day1data.txt");
+    List<int> calories = GetLinesInTxtFile("Day1/day1data.txt");
 
     int count = 0;
     List<int> sums = new List<int>();
