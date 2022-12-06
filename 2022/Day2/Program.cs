@@ -1,6 +1,6 @@
 ﻿List<string> lineInput = new List<string>();
 
-foreach (var line in File.ReadAllLines("input.txt"))
+foreach (var line in File.ReadAllLines("./input.txt"))
 {
   lineInput.Add(line);
 }
