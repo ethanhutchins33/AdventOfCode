@@ -1,4 +1,4 @@
-namespace AOC;
+namespace AdventOfCode2022.Day1;
 
 public class Day1
 {
@@ -16,7 +16,7 @@ public class Day1
 
   public static void GetHighestCalories()
   {
-    List<int> calories = GetLinesInTxtFile("Day1/day1data.txt");
+    List<int> calories = GetLinesInTxtFile("input.txt");
 
     int count = 0;
     List<int> sums = new List<int>();
