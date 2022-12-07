@@ -88,9 +88,11 @@ int WhatIShouldThrow(char ExpectedOutcome, int o)
 }
 
 score = 0;
+int myMove = 0;
+
 for (int i = 0; i < OpponentMoves.Count; i++)
 {
-  var myMove = WhatIShouldThrow((ExpectedOutcomes[i]), OpponentMoves[i]);
+  myMove = WhatIShouldThrow((ExpectedOutcomes[i]), OpponentMoves[i]);
   score += WinDrawLoseValue(OpponentMoves[i], myMove) + myMove;
 }
 
