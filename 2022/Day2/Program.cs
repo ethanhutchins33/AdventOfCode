@@ -44,3 +44,33 @@ int GetValueOfHand(string hand)
 }
 
 //Part 2 Code
+//1 = Rock
+//2 = Paper
+//3 = Scissors
+
+int WhatIShouldThrow(int ExpectedOutcome, int o)
+{
+  if (ExpectedOutcome == 3) //draw
+  {
+    return o;
+  }
+  else if (ExpectedOutcome == 0) //lose
+  {
+    return (o + 2) % 3; //(o - ((m + 2) % 3)) == 2 //// (1 - ((3 + 2) % 3))
+  }
+  else
+  {
+    return (o + 1) % 3; //win
+  }
+}
+
+//(o - ((m + 2) % 3)) == 2 
+//(m + 2)
+
+
+
+score = 0;
+for (int i = 0; i < OpponentMoves.Count; i++)
+{
+  score += WinDrawLoseValue(OpponentMoves[i], MyMoves[i]) + MyMoves[i];
+}
