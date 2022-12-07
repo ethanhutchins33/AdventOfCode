@@ -1,18 +1,12 @@
-﻿List<string> lineInput = new List<string>();
-
-foreach (var line in File.ReadAllLines("./input.txt"))
-{
-  lineInput.Add(line);
-}
-
+﻿
 List<int> OpponentMoves = new List<int>();
 List<int> MyMoves = new List<int>();
 
-lineInput.ForEach(x =>
+foreach (var line in File.ReadAllLines("./input.txt"))
 {
-  OpponentMoves.Add(GetValueOfHand(x.Substring(0, 1)));
-  MyMoves.Add(GetValueOfHand(x.Substring(2, 1)));
-});
+  OpponentMoves.Add(GetValueOfHand(line.Substring(0, 1)));
+  MyMoves.Add(GetValueOfHand(line.Substring(2, 1)));
+}
 
 int score = 0;
 for (int i = 0; i < OpponentMoves.Count; i++)
@@ -22,7 +16,7 @@ for (int i = 0; i < OpponentMoves.Count; i++)
 
 System.Console.WriteLine($"Final Score Part 1: {score}");
 
-static int WinDrawLoseValue(int o, int m)
+int WinDrawLoseValue(int o, int m)
 {
   if (o == m)
   {
@@ -38,7 +32,7 @@ static int WinDrawLoseValue(int o, int m)
   }
 }
 
-static int GetValueOfHand(string hand)
+int GetValueOfHand(string hand)
 {
   return hand switch
   {
