@@ -5,61 +5,46 @@ foreach (var line in File.ReadAllLines("./input.txt"))
   lineInput.Add(line);
 }
 
-//lineInput.ForEach(x => Console.WriteLine(x));
-
-List<char> OpponentMoves = new List<char>();
-List<char> MyMoves = new List<char>();
+List<int> OpponentMoves = new List<int>();
+List<int> MyMoves = new List<int>();
 
 lineInput.ForEach(x =>
 {
-  OpponentMoves.Add(Char.Parse(x.Substring(0, 1)));
-  MyMoves.Add(Char.Parse(x.Substring(2, 1)));
+  OpponentMoves.Add(GetValueOfHand(x.Substring(0, 1)));
+  MyMoves.Add(GetValueOfHand(x.Substring(2, 1)));
 });
 
-//OpponentMoves.ForEach(x => System.Console.WriteLine(x));
-//MyMoves.ForEach(x => System.Console.WriteLine(x));
-
-//A, X = Rock = 1
-//B, Y = Paper = 2
-//C, Z = Scissors = 3
-
 int score = 0;
-
 for (int i = 0; i < OpponentMoves.Count; i++)
 {
-  switch (OpponentMoves[i])
-  {
-    case 'A':
-      if (MyMoves[i] == 'Y')
-      {
-        score = score + GetScoreOfMyHand(MyMoves[i]) + 6;
-      }
-      else if (MyMoves[i] == 'X')
-      {
-        score = score + 1;
-      }
-      else if (MyMoves[i] == 'Z')
-      {
-        score = score + 3;
-      }
-      break;
-    case 'B':
-
-      break;
-    case 'C':
-
-      break;
-  }
-
+  score += WinDrawLoseValue(OpponentMoves[i], MyMoves[i]) + MyMoves[i];
 }
 
-static int GetScoreOfMyHand(char myMove)
+System.Console.WriteLine($"Final Score Part 1: {score}");
+
+static int WinDrawLoseValue(int o, int m)
 {
-  return myMove switch
+  if (o == m)
   {
-    'X' => 1,
-    'Y' => 2,
-    'Z' => 3,
+    return 3;
+  }
+  else if ((o - ((m + 1) % 3)) == 1)
+  {
+    return 6;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+static int GetValueOfHand(string hand)
+{
+  return hand switch
+  {
+    "A" or "X" => 1,
+    "B" or "Y" => 2,
+    "C" or "Z" => 3,
     _ => 0,
   };
 }
