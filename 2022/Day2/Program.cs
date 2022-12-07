@@ -48,3 +48,5 @@ static int GetValueOfHand(string hand)
     _ => 0,
   };
 }
+
+//Part 2 Code
