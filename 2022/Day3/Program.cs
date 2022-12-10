@@ -13,18 +13,18 @@ bool matchFound = false;
 for (int i = 0; i < LeftCompartments.Count(); i++)
 {
   matchFound = false;
-  System.Console.WriteLine($"Left: {LeftCompartments[i]}, Right: {RightCompartments[i]}");
+  //System.Console.WriteLine($"Left: {LeftCompartments[i]}, Right: {RightCompartments[i]}");
 
   foreach (var characterL in LeftCompartments[i])
   {
     foreach (var characterR in RightCompartments[i])
     {
-      System.Console.WriteLine($"LeftChar: {characterL}, RightChar: {characterR}");
+      //.Console.WriteLine($"LeftChar: {characterL}, RightChar: {characterR}");
 
       if (characterL == characterR)
       {
         repeatingChars.Add(characterL);
-        System.Console.WriteLine($"Match Found! {characterL} == {characterR} => {ReturnValueOfChar(characterL)}");
+        //System.Console.WriteLine($"Match Found! {characterL} == {characterR} => {ReturnValueOfChar(characterL)}");
         matchFound = true;
         break;
       }
