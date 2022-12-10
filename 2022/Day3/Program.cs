@@ -7,25 +7,50 @@ foreach (string line in System.IO.File.ReadAllLines("./input.txt"))
   RightCompartments.Add(line.Substring(line.Length / 2, line.Length / 2));
 }
 
-char Get()
-{
+List<char> repeatingChars = new List<char>();
+bool matchFound = false;
 
-  char charL = Char.Parse(LeftCompartments[0].Substring(0, 1));
-  char charR = Char.Parse(RightCompartments[0].Substring(0, 1));
-  if (charL == charR)
-  {
-    return charL;
-  }
-
-}
-foreach (var charL in LeftCompartments)
+for (int i = 0; i < LeftCompartments.Count(); i++)
 {
-  foreach (var charR in RightCompartments)
+  matchFound = false;
+  System.Console.WriteLine($"Left: {LeftCompartments[i]}, Right: {RightCompartments[i]}");
+
+  foreach (var characterL in LeftCompartments[i])
   {
-    if (charL == charR)
+    foreach (var characterR in RightCompartments[i])
     {
+      System.Console.WriteLine($"LeftChar: {characterL}, RightChar: {characterR}");
 
+      if (characterL == characterR)
+      {
+        repeatingChars.Add(characterL);
+        System.Console.WriteLine($"Match Found! {characterL} == {characterR} => {ReturnValueOfChar(characterL)}");
+        matchFound = true;
+        break;
+      }
+    }
+
+    if (matchFound)
+    {
+      break;
     }
   }
 }
 
+int ReturnValueOfChar(char x)
+{
+  if (Char.IsUpper(x))
+  {
+    return (int)x - 38;
+  }
+  else
+  {
+    return (int)x - 96;
+  }
+}
+
+int result = 0;
+
+repeatingChars.ForEach(x => result += ReturnValueOfChar(x));
+
+System.Console.WriteLine($"Part 1: {result}");
