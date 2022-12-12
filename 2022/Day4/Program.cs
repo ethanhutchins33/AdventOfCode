@@ -8,6 +8,7 @@ foreach (var line in System.IO.File.ReadAllLines("./input.txt"))
 String elf1Area = "";
 String elf2Area = "";
 int p1Result = 0;
+int p2Result = 0;
 
 for (int i = 0; i < areasToClean.Count; i++)
 {
@@ -26,9 +27,16 @@ for (int i = 0; i < areasToClean.Count; i++)
   {
     p1Result++;
   }
+
+  // Part 2
+  if ((elf1Lowest <= elf2Highest && elf1Highest >= elf2Highest) || (elf2Lowest <= elf1Highest && elf2Highest >= elf1Highest))
+  {
+    p2Result++;
+  }
 }
 
 System.Console.WriteLine("Part 1: " + p1Result);
+System.Console.WriteLine("Part 2: " + p2Result);
 
 int HyphenIndex(string area)
 {
