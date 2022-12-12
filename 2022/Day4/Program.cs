@@ -7,37 +7,28 @@ foreach (var line in System.IO.File.ReadAllLines("./input.txt"))
 
 String Elf1Area = "";
 String Elf2Area = "";
-
 int part1Result = 0;
 
 for (int i = 0; i < AreasToClean.Count; i++)
 {
-  Elf1Area = convertHyphenToInLineString(
-    AreasToClean[i]
-    .Substring(
-      0,
-      commaIndex(AreasToClean[i])
-    )
-  );
+  Elf1Area = AreasToClean[i].Substring(0, commaIndex(AreasToClean[i]));
 
-  Elf2Area = convertHyphenToInLineString(
-    AreasToClean[i]
-    .Substring(
+  Elf2Area = AreasToClean[i].Substring(
       (commaIndex(AreasToClean[i]) + 1),
-      AreasToClean[i].Length - (commaIndex(AreasToClean[i]) + 1)
-    )
-  );
+      AreasToClean[i].Length - (commaIndex(AreasToClean[i]) + 1));
 
-  System.Console.WriteLine($"Elf1Area: {Elf1Area}");
-  System.Console.WriteLine($"Elf2Area: {Elf2Area}");
+  int Elf1Lowest = returnLowest(Elf1Area);
+  int Elf1Highest = returnHighest(Elf1Area);
+  int Elf2Lowest = returnLowest(Elf2Area);
+  int Elf2Highest = returnHighest(Elf2Area);
 
-  if (Elf1Area.Contains(Elf2Area) || Elf2Area.Contains(Elf1Area))
+  if ((Elf1Lowest <= Elf2Lowest && Elf1Highest >= Elf2Highest) || (Elf2Lowest <= Elf1Lowest && Elf2Highest >= Elf1Highest))
   {
-    System.Console.WriteLine("Match!");
     part1Result++;
-    System.Console.WriteLine($"Part 1 Answer: {part1Result}");
   }
 }
+
+System.Console.WriteLine(part1Result);
 
 int hyphenIndex(string area)
 {
@@ -71,22 +62,12 @@ int commaIndex(string area)
   return result;
 }
 
-
-string convertHyphenToInLineString(string AreaWithHyphen)
+int returnLowest(string AreaWithHyphen)
 {
-  int hyIndex = hyphenIndex(AreaWithHyphen);
-
-  int num1 = int.Parse(AreaWithHyphen.Substring(0, hyIndex));
-  int num2 = int.Parse(AreaWithHyphen.Substring(hyIndex + 1, AreaWithHyphen.Length - (hyIndex + 1)));
-
-  string result = "";
-
-  for (int i = num1; i <= num2; i++)
-  {
-    result = result + i.ToString();
-  }
-
-  return result;
-
+  return int.Parse(AreaWithHyphen.Substring(0, hyphenIndex(AreaWithHyphen)));
 }
 
+int returnHighest(string AreaWithHyphen)
+{
+  return int.Parse(AreaWithHyphen.Substring(hyphenIndex(AreaWithHyphen) + 1, AreaWithHyphen.Length - (hyphenIndex(AreaWithHyphen) + 1)));
+}
