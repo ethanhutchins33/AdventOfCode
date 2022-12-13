@@ -30,6 +30,7 @@ for (int i = 7; i >= 0; i--)
 int numCratesToMove = 0;
 int fromStack = 0;
 int toStack = 0;
+Stack<char> tempCrate = new Stack<char>();
 string[] numbers;
 
 
@@ -40,15 +41,20 @@ for (int i = 10; i < lines.Count; i++)
   numCratesToMove = int.Parse(numbers[1]);
   fromStack = int.Parse(numbers[2]);
   toStack = int.Parse(numbers[3]);
-  Console.WriteLine($"Number: {numCratesToMove}, {fromStack}, {toStack}");
+
+  tempCrate.Clear();
 
   while (numCratesToMove != 0)
   {
-    stacks[toStack - 1].Push(stacks[fromStack - 1].Pop());
+    tempCrate.Push(stacks[fromStack - 1].Pop());
     numCratesToMove--;
   }
-}
 
+  while (tempCrate.Count != 0)
+  {
+    stacks[toStack - 1].Push(tempCrate.Pop());
+  }
+}
 
 for (int i = 0; i < stacks.Count; i++)
 {
