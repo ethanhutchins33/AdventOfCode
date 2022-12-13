@@ -33,7 +33,6 @@ int toStack = 0;
 Stack<char> tempCrate = new Stack<char>();
 string[] numbers;
 
-
 for (int i = 10; i < lines.Count; i++)
 {
   numbers = Regex.Split(lines[i], @"\D+");
