@@ -1,4 +1,6 @@
-﻿List<string> lines = new List<string>();
+﻿using System.Text.RegularExpressions;
+
+List<string> lines = new List<string>();
 List<Stack<char>> stacks = new List<Stack<char>>();
 
 // Initialise Stacks
@@ -25,13 +27,30 @@ for (int i = 7; i >= 0; i--)
   }
 }
 
-for (int i = 0; i < stacks.Count; i++)
+int numCratesToMove = 0;
+int fromStack = 0;
+int toStack = 0;
+string[] numbers;
+
+
+for (int i = 10; i < lines.Count; i++)
 {
-  while (stacks[i].Count != 0)
+  numbers = Regex.Split(lines[i], @"\D+");
+
+  numCratesToMove = int.Parse(numbers[1]);
+  fromStack = int.Parse(numbers[2]);
+  toStack = int.Parse(numbers[3]);
+  Console.WriteLine($"Number: {numCratesToMove}, {fromStack}, {toStack}");
+
+  while (numCratesToMove != 0)
   {
-    System.Console.WriteLine(stacks[i].Pop().ToString());
+    stacks[toStack - 1].Push(stacks[fromStack - 1].Pop());
+    numCratesToMove--;
   }
-  System.Console.WriteLine("------------------");
 }
 
 
+for (int i = 0; i < stacks.Count; i++)
+{
+  System.Console.Write(stacks[i].Pop().ToString());
+}
